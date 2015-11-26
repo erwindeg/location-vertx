@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+<script src="app/js/sockjs-client/dist/sockjs.js"></script>
+<script src="app/js/vertxbus.js/index.js"></script>
+<script>
+	var eventbus = new vertx.EventBus('http://localhost:9080/eventbus');
+	eventbus.onopen = function() {
+		eventbus.registerHandler('event', function(message) {
+			var div = document.getElementById('content');
+
+			div.innerHTML = div.innerHTML + '<br><br>'+message.eventmessage;
+		});
+	}
+</script>
+</head>
+<body>
+	<div id="content"></div>
+</body>
+</html>
